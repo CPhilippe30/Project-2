@@ -1,11 +1,10 @@
-from logging import debug
-from flask import Flask, jsonify, render_template
-from os import environ
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from os import environ
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 
 # database setup
