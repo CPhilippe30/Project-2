@@ -1,35 +1,28 @@
-from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify, render_template
+from dotenv import load_dotenv
 from os import environ
+from flask_sqlalchemy import SQLAlchemy
+from flask_pymongo import PyMongo
+import json
+
+
+load_dotenv()
+
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project2-group-5.db'
+app.config['MONGO_URI'] = environ.get('MONGODB_URI')
+##app.config["MONGO_URI"] = "mongodb://localhost:27017/nflduidb"
 
 
 # database setup
-db = SQLAlchemy(app)
+mongo = PyMongo(app)
 
-class Arrest(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String)
 
-@app.route('/')
-def index():
-    return "NFL Arrests"
+nflduidb = mongo.db.nflduidb
+nflduidb.drop()
+with open('data/nfl-dui.json') as f:
+    data = json.load(f)
+    for row in data:
+        nflduidb.insert_one(row)
 
-@app.route('/api/arrests/postgres')
-def arrest_postgres():
-    arrests = db.session.query(Arrest)
-    data = []
-
-    for arrest in arrests:
-        data.append({
-            "id": arrest.id,
-            "content": arrest.content
-        })
-
-    return jsonify(data)
-
-if __name__ == '__main__':
-    app.run(debug=True)
