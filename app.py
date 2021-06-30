@@ -20,12 +20,12 @@ mongo = PyMongo(app)
 
 
 
-nflduidb = mongo.db.nflduidb
-nflduidb.drop()
-with open('data/nfl-dui.json') as f:
-    data = json.load(f)
-    for row in data:
-        nflduidb.insert_one(row)
+# ## nflduidb = mongo.db.nflduidb
+# ##nflduidb.drop()
+# with open('data/nfl-dui.json') as f:
+#     data = json.load(f)
+#     for row in data:
+#         nflduidb.insert_one(row)
 
 @app.route("/")
 def index():
