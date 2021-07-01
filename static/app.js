@@ -31,10 +31,8 @@ found in that individual.
     })
 }
 function initdropdown(){
-    d3.request("/main").get(response => {
-        console.log(response)
-        data = JSON.parse(response.response);
-        console.log(data)
+    d3.json("/main").then(data => {
+
         var names = data.map(a => a.NAME);
         var display = d3.select("#selDataset");
         names.forEach((data) => {
@@ -54,10 +52,12 @@ function optionChanged(id){
 }
 
 function metadata(sampleid){
-    d3.json("data/nfl-dui.json").then(function(data){
+    console.log(d3.json('/static/data/nfl-dui.json'))
+    d3.json("/static/data/nfl-dui.json").then(function(data){
         console.log(data)
         var metadata = data.metadata;
-        var filterdata = metadata.filter(row => row.id == sampleid);
+        var filterdata = data.filter(row => row.NAME == sampleid);
+        console.log(sampleid)
         var result = filterdata[0];
         var display = d3.select("#sample-metadata");
         display.html("");
