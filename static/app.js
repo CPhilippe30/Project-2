@@ -46,7 +46,6 @@ function initdropdown(){
 
 }
 
-
 //end function initdropdown
 function optionChanged(id){
     metadata(id);
@@ -59,13 +58,13 @@ function metadata(sampleid){
         console.log(data)
         var metadata = data.metadata;
         var filterdata = metadata.filter(row => row.id == sampleid);
-    var result = filterdata[0];
-    var display = d3.select("#sample-metadata");
-    display.html("");
-    Object.entries(result).forEach(([key, value]) => {
-        display.append("h5").text(`${key}: ${value}`);
+        var result = filterdata[0];
+        var display = d3.select("#sample-metadata");
+        display.html("");
+        Object.entries(result).forEach(([key, value]) => {
+            display.append("h5").text(`${key}: ${value}`);
+        })
     })
-})
 }
 
 
