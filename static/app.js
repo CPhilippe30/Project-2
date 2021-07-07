@@ -70,17 +70,17 @@ function metadata(sampleid){
 This function displays a meter graph to display the average severity that year based on the 0-5 scale
 - the severity ranges from 0-found asleep behind the wheel to 5-manslaughter
 */
-function gaugeChart(sampleid){
+function gaugeChart(id){
     d3.json("/static/data/nfl-dui.json").then(function(data){
        
         console.log(data)
         var metadata = data.metadata;
-        var filterdata = metadata.filter(row => row.id == sampleid);
+        var filterdata = metadata.filter(row => row.id == id);
         var result = filterdata[0];
-        var wfreq = result.wfreq;
+       // var wfreq = result.wfreq;
         var data = [{
             domain = {'x': [0, 1], 'y': [0, 1]},
-            title = {'text': "Speed", 'font': {'size': 24}},
+            title = {'text': "NFL DUI Speedometer", 'font': {'size': 24}},
             delta = {'reference': 400, 'increasing': {'color': "RebeccaPurple"}},
               
           type: "indicator",
