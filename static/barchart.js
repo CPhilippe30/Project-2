@@ -10,7 +10,7 @@ d3.json("static/data/nfl-dui2.json").then((duiData) => {
     // Filtering Dui.
     console.log(filteredDui);
   
-    var teams = filteredDui.map(category =>  category.NAME);
+    var teams = filteredDui.map(category =>  category.TEAM);
   
     var category = filteredDui.map(category => category.Severity);
   
