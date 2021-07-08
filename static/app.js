@@ -33,7 +33,7 @@ function initdropdown(){
     console.log('initdropdown')
     d3.json("/main").then(data => {
         console.log(data)
-        var names = data.map(a => a.YEARS);
+        var names = data.map(a => a.YEAR);
         var display = d3.select("#selDataset");
         names.forEach((data) => {
             display.append("option").text(data).property("value", data);
@@ -57,7 +57,7 @@ function metadata(sampleid){
     d3.json("/static/data/nfl-dui2.json").then(function(data){
         console.log(data)
         var metadata = data.metadata;
-        var filterdata = data.filter(row => row.YEARS == sampleid);
+        var filterdata = data.filter(row => row.YEAR == sampleid);
         console.log(sampleid)
         var result = filterdata[0];
         var display = d3.select("#sample-metadata");
