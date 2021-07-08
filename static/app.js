@@ -1,6 +1,7 @@
 
+initdropdown(); //calls function to fill dropdown object
 function createChart(sampleid){
-    d3.json("static/data/nfl-dui2.json").then(function(data){
+    d3.json("data/nfl-dui2.json").then(function(data){
 /*
 Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs 
 found in that individual.
@@ -30,20 +31,18 @@ found in that individual.
     })
 }
 function initdropdown(){
-    console.log('initdropdown')
     d3.json("/main").then(data => {
-        console.log(data)
-        var names = data.map(a => a.YEAR);
+
+        var names = data.map(a => a.Year);
         var display = d3.select("#selDataset");
         names.forEach((data) => {
             display.append("option").text(data).property("value", data);
             
-        });
+});
 
-    })
+})
 
 }
-initdropdown(); //calls function to fill dropdown object
 
 //end function initdropdown
 function optionChanged(id){
@@ -57,7 +56,7 @@ function metadata(sampleid){
     d3.json("/static/data/nfl-dui2.json").then(function(data){
         console.log(data)
         var metadata = data.metadata;
-        var filterdata = data.filter(row => row.YEAR == sampleid);
+        var filterdata = data.filter(row => row.Year == sampleid);
         console.log(sampleid)
         var result = filterdata[0];
         var display = d3.select("#sample-metadata");
@@ -66,70 +65,9 @@ function metadata(sampleid){
             display.append("h5").text(`${key}: ${value}`);
         })
     })
-}// metadata
-/*
-This function displays a meter graph to display the average severity that year based on the 0-5 scale
-- the severity ranges from 0-found asleep behind the wheel to 5-manslaughter
-*/
-// function gaugeChart(id){
-//     d3.json("/static/data/nfl-dui.json").then(function(data){
-       
-//         console.log(data)
-//         var metadata = data.metadata;
-//         var filterdata = metadata.filter(row => row.id == id);
-//         var result = filterdata[0];
-//        // var wfreq = result.wfreq;
-//         var data = [{
-//             domain = {'x': [0, 1], 'y': [0, 1]},
-//             title = {'text': "NFL DUI Speedometer", 'font': {'size': 24}},
-//             delta = {'reference': 400, 'increasing': {'color': "RebeccaPurple"}},
-              
-//           type: "indicator",
-//           mode: "gauge",
-//           value: wfreq,
-//           gauge: {
-//             axis: { range: [null, 5], tickwidth: 1, tickcolor: "darkblue" },
-//             bar: { color: "darkblue" },
-//             bgcolor: "white",
-//             borderwidth: 2,
-//             bordercolor: "green",
-//             steps: [
-//               { range: [0, 1], color: "rgba(0,128,128,.05)" },
-//               { range: [1, 2], color: "rgba(0,128,128,.1)"  },
-//               { range: [2, 3], color: "rgba(0,128,128,.15)" },
-//               { range: [3, 4], color: "rgba(0,128,128,.20)" },
-//               { range: [4, 5], color: "rgba(0,128,128,.25)" }
-//             ],//end steps
-//             title: 'Auto-Resize',
-//                 font: {
-//                     size: 16
-//                 },
-//             threshold: {
-//               line: { color: "red", width: 4 },
-//               thickness: 0.75,
-//               value: wfreq
-//             }//end threshold
-//           }//end gauge
-//         }]; //data
-      
-//       var layout = {
-//         width: 500,
-//         height: 400,
-//         font: { color: "darkblue", family: "Arial" },
-//         title: { text: "NFL DUI Arrests", font: { size: 24 }}
-      
-//       };//end layout
-      
-//       Plotly.newPlot('gauge', data, layout);
-//     })//end d3
-// }//end function
+}
 
 
 
 
-
-
-
-
-
-
+// metadata
