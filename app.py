@@ -22,7 +22,7 @@ mongo = PyMongo(app)
 
 nflduidb = mongo.db.nflduidb
 nflduidb.drop()
-with open('data/nfl-dui.json') as f:
+with open('static/data/nfl-dui2.json') as f:
     data = json.load(f)
     for row in data:
         nflduidb.insert_one(row)
