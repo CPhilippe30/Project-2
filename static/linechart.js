@@ -1,7 +1,6 @@
-
 initdropdown(); //calls function to fill dropdown object
 function createChart(sampleid){
-    d3.json("data/nfl-dui2.json").then(function(data){
+    d3.json("static/data/nfl-dui2.json").then(function(data){
 /*
 Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs 
 found in that individual.
@@ -32,31 +31,25 @@ found in that individual.
 }
 function initdropdown(){
     d3.json("/main").then(data => {
-
-        var names = data.map(a => a.Year);
+        var names = data.map(a => a.NAME);
         var display = d3.select("#selDataset");
         names.forEach((data) => {
             display.append("option").text(data).property("value", data);
-            
 });
-
 })
-
 }
-
 //end function initdropdown
 function optionChanged(id){
     metadata(id);
     createChart(id);
     createBubbles(id);
 }
-
 function metadata(sampleid){
-    console.log(d3.json('/static/data/nfl-dui2.json'))
-    d3.json("/static/data/nfl-dui2.json").then(function(data){
+    console.log(d3.json("static/data/nfl-dui2.json"))
+    d3.json("static/data/nfl-dui2.json").then(function(data){
         console.log(data)
         var metadata = data.metadata;
-        var filterdata = data.filter(row => row.Year == sampleid);
+        var filterdata = data.filter(row => row.NAME == sampleid);
         console.log(sampleid)
         var result = filterdata[0];
         var display = d3.select("#sample-metadata");
@@ -67,10 +60,7 @@ function metadata(sampleid){
     })
 }
 
-
-
-function linegraph(year){
-    var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var dui = [];
     for (var i = 0; i <= 12; i++) {
       dui[i] = 0
@@ -92,6 +82,3 @@ function linegraph(year){
     };
     var data = [line_trace];
     Plotly.newPlot('line', data, line_layout);
-
-
-}

@@ -29,7 +29,7 @@ with open('static/data/nfl-dui2.json') as f:
 
 @app.route("/")
 def index():
-    return render_template("barchart.html")
+    return render_template("linechart.html")
 
 @app.route("/main", methods=['GET'])
 def main():

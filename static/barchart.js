@@ -1,9 +1,9 @@
 // Use d3.json() to fetch data from JSON file
 d3.json("static/data/nfl-dui2.json").then((duiData) => {
     function filterDuiData(dui) {
-      return dui.Year ===2001;
+      return dui.Year ===2000;
     }
-  
+
     // Use filter() to pass the function as its argument
     var filteredDui = duiData.filter(filterDuiData);
   
@@ -14,7 +14,7 @@ d3.json("static/data/nfl-dui2.json").then((duiData) => {
   
     var category = filteredDui.map(category => category.Severity);
   
-    // Filtered metascores.
+    // Filtered category.
     console.log(category);
   
     // Create your trace.
@@ -31,7 +31,7 @@ d3.json("static/data/nfl-dui2.json").then((duiData) => {
     var layout = {
       title: "Teams with highest DUI Arrested.",
       xaxis: { teams: "Team" },
-      yaxis: { category: "Metascore (Dui) Arrested"}
+      yaxis: { category: " NFL (Dui) Arrested"}
     };
   
     // Plot the chart to a div tag with id "bar-plot"

@@ -1,8 +1,13 @@
-.bubbles {
-  stroke-width: 1px;
-  stroke: black;
-  opacity: .8
+html,
+body {
+  padding: 0;
+  margin: 0;
 }
-.bubbles:hover {
-  stroke: black;
+
+.bar {
+  fill: orange;
+}
+
+.bar:hover {
+  fill: green;
 }
