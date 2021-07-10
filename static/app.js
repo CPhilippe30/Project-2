@@ -238,3 +238,4 @@ function gauge(yrid){
       Plotly.newPlot('gauge', data, layout);
     })//end d3
 }//end function
+
