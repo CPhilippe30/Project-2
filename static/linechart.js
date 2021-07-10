@@ -1,84 +1,53 @@
-initdropdown(); //calls function to fill dropdown object
-function createChart(sampleid){
-    d3.json("static/data/nfl-dui2.json").then(function(data){
-/*
-Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs 
-found in that individual.
-*/
-        console.log(data)//displays data
-        var samples = data.samples;
-        var filterdata = samples.filter(row => row.id == sampleid);
-        var result = filterdata[0]
-        var sample_values = result.sample_values
-        var otu_ids = result.otu_ids
-        console.log(otu_ids)
-        var data = [{
-            x:sample_values.slice(0, 10).reverse(), 
-            y:otu_ids.slice(0, 10).reverse(),
-            type:"bar",
-            orientation:"h",
-            ylabels: otu_ids,
-            xlabels: sample_values,
-            transform: "rotate(-90)"
-        }];
-        var layout = {
-            title: "NFL DUI Arrests",
-            xaxis: { title: "" },
-            yaxis: { title: "" }
-          };
-    Plotly.newPlot("bar", data, layout);
-    })
-}
-function initdropdown(){
-    d3.json("/main").then(data => {
-        var names = data.map(a => a.NAME);
-        var display = d3.select("#selDataset");
-        names.forEach((data) => {
-            display.append("option").text(data).property("value", data);
-});
-})
-}
-//end function initdropdown
-function optionChanged(id){
-    metadata(id);
-    createChart(id);
-    createBubbles(id);
-}
-function metadata(sampleid){
-    console.log(d3.json("static/data/nfl-dui2.json"))
-    d3.json("static/data/nfl-dui2.json").then(function(data){
-        console.log(data)
-        var metadata = data.metadata;
-        var filterdata = data.filter(row => row.NAME == sampleid);
-        console.log(sampleid)
-        var result = filterdata[0];
-        var display = d3.select("#sample-metadata");
-        display.html("");
-        Object.entries(result).forEach(([key, value]) => {
-            display.append("h5").text(`${key}: ${value}`);
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+//Read the data
+d3.json("static/data/linechart.json").then(function(data){
+  console.log(data)
+  // group the data: I want to draw one line per group
+  var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+    .key(function(d) { return d.name;})
+    .entries(data);
+  // Add X axis --> it is a date format
+  var x = d3.scaleLinear()
+    .domain(d3.extent(data, function(d) { return d.year; }))
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).ticks(5));
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, d3.max(data, function(d) { return +d.n; })])
+    .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
+  // color palette
+  var res = sumstat.map(function(d){ return d.key }) // list of group names
+  var color = d3.scaleOrdinal()
+    .domain(res)
+    .range(['#E41A1C','#377EB8','#4DAF4A','#984EA3','#FF7F00','#FFFF33','#A65628','#F781BF','#999999'])
+  // Draw the line
+  svg.selectAll(".line")
+      .data(sumstat)
+      .enter()
+      .append("path")
+        .attr("fill", "none")
+        .attr("stroke", function(d){ return color(d.key) })
+        .attr("stroke-width", 1.5)
+        .attr("d", function(d){
+          console.log(d)
+          return d3.line()
+            .x(function(d) { return x(d.year); })
+            .y(function(d) { return y(+d.n); })
+            (d.values)
         })
-    })
-}
-
-var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var dui = [];
-    for (var i = 0; i <= 12; i++) {
-      dui[i] = 0
-    }
-    console.log("results.length")
-    console.log(results.length)
-    for (var i = 0; i < results.length; i++) {
-      m = results[i].Month
-      dui[m] += 1
-    }
-    console.log(month, "= ", dui)
-    var line_trace = {
-      x: month,
-      y: dui,
-      type: 'scatter'
-    };
-    var line_layout = {
-      title: `NFL Monthly DUI in ${selected_yr}`,
-    };
-    var data = [line_trace];
-    Plotly.newPlot('line', data, line_layout);
+})

@@ -45,6 +45,8 @@ function initdropdown(){
 function optionChanged(id){
     metadata(id);
     createBarChart(id);
+    gauge(id);
+
 }
 
 function metadata(sampleid){
@@ -177,15 +179,25 @@ function gauge(yrid){
             return d.Year == yrid;
         }  
         var yrdetails = data.filter(filterDuiData) 
+        console.log("yrdetails")
         console.log(yrdetails)
+        console.log("yrdetails length")
+        console.log(yrdetails.length)
         var metadata = yrdetails[0];
-       //if severity category is 0 add 1
-        var duicat = metadata.Severity;
-        if(duicat == 0){
-            duicat +=1
-            metadata.Severity+=1
+        sum = 0;
+        for (var i = 0; i < yrdetails.length; i++) {
+            sum += +yrdetails[i].Severity;
         }
-        var title = metadata.TEAM
+        average = Math.round(sum / yrdetails.length )
+        console.log("sum")
+        console.log(sum)
+        console.log('average')
+        console.log(average)
+       //if severity category is 0 add 1
+        var duicat = average;
+        console.log('average')
+        console.log(average)
+        var title = "Teams Average Severity"
         console.log('duicat')
         console.log(duicat)
         var data = [{
@@ -222,7 +234,6 @@ function gauge(yrid){
        // margin: { t: 0, r: 0, l: 0, b: 0 },
         font: { color: "darkblue", family: "Arial" },
         title: { text: title, font: { size: 24 }}
-        //Sub title should be Team name
       };//end layout
       Plotly.newPlot('gauge', data, layout);
     })//end d3
