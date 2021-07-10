@@ -1,4 +1,3 @@
-
 initdropdown(); //calls function to fill dropdown object
 function createChart(sampleid){
     d3.json("data/nfl-dui2.json").then(function(data){
@@ -238,17 +237,3 @@ function gauge(yrid){
       Plotly.newPlot('gauge', data, layout);
     })//end d3
 }//end function
-
-
-
-
-
-
-
-
-
-
-
-
-
-
