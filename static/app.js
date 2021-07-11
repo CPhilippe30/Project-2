@@ -265,3 +265,19 @@ function lineGraph(yrid){
            if (team_array.indexOf(row_data.TEAM) === -1) {
            team_array.push(row_data.TEAM)
            }//end if
+        });//end data.map
+        console.log(year_array);
+        // yearTag.append("option")
+        //         .property("value", "")
+        //         .text("Select Year");
+        // year_array.map((year) => {
+        //     yearTag.append("option")
+        //             .property("value", year)
+        //             .text(year);
+        // });
+        // console.log("yearTag")
+        // console.log(yearTag)
+        team_array.map((element) => {
+            team[element] = 0
+            // console.log(element, "= ", team[element])
+        });
