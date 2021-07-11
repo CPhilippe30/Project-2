@@ -253,3 +253,15 @@ function lineGraph(yrid){
         }  
         var yrdetails = data.filter(filterDuiData) 
        // var yearTag = d3.select('#selDataset');
+       year_array = [];
+       team_array = [];
+       team = {};
+       data.map((row_data) => {
+           if (year_array.indexOf(row_data.Year) === -1) {
+               year_array.push(row_data.Year)
+               // console.log("row_data")
+               // console.log(row_data.Year)
+           }
+           if (team_array.indexOf(row_data.TEAM) === -1) {
+           team_array.push(row_data.TEAM)
+           }//end if
