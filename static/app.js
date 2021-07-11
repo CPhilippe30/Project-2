@@ -313,3 +313,7 @@ function lineGraph(yrid){
         y: dui,
         type: 'scatter'
         };
+        selected_yr = yrid
+        var line_layout = {
+        title: `NFL Teams Monthly DUI in ${selected_yr}`
+        };
