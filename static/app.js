@@ -281,3 +281,17 @@ function lineGraph(yrid){
             team[element] = 0
             // console.log(element, "= ", team[element])
         });
+        results = yrdetails; //data.filter(row => row.Year == selected_yr);
+        for (var i = 0; i < results.length; i++) {
+            teamName = results[i].TEAM
+            team[teamName] += 1
+            console.log(teamName, "= ", team[teamName])
+        }//end for
+        y_label = [];
+        x_value = [];
+        for (teamName in team) {
+            if (team[teamName] != 0) {
+                y_label.push(teamName)
+                x_value.push(team[teamName])
+            }
+        }
