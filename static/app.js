@@ -246,3 +246,8 @@ function gauge(yrid){
 function lineGraph(yrid){
     console.log("in line gragh function")
     d3.json("../static/data/nfl-dui2.json").then(function(data){
+        // console.log("in metadata")
+        // console.log(data)
+        function filterDuiData(d) {
+            return d.Year == yrid;
+        }  
