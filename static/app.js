@@ -243,3 +243,6 @@ function gauge(yrid){
 
 
 
+function lineGraph(yrid){
+    console.log("in line gragh function")
+    d3.json("../static/data/nfl-dui2.json").then(function(data){
