@@ -251,3 +251,5 @@ function lineGraph(yrid){
         function filterDuiData(d) {
             return d.Year == yrid;
         }  
+        var yrdetails = data.filter(filterDuiData) 
+       // var yearTag = d3.select('#selDataset');
