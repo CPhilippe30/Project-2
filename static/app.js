@@ -317,3 +317,9 @@ function lineGraph(yrid){
         var line_layout = {
         title: `NFL Teams Monthly DUI in ${selected_yr}`
         };
+        var data = [line_trace];
+        Plotly.newPlot('line', data, line_layout);
+  });
+}// line chart
+
+
