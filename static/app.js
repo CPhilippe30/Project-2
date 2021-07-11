@@ -307,3 +307,9 @@ function lineGraph(yrid){
         m = results[i].DATE[0]
         dui[m] += 1
         }
+        console.log(month, "= ", dui)
+        var line_trace = {
+        x: month,
+        y: dui,
+        type: 'scatter'
+        };
