@@ -301,3 +301,9 @@ function lineGraph(yrid){
         for (var i = 0; i <= 12; i++) {
         dui[i.toString()] = 0
         }
+        console.log("results.length")
+        console.log(results)
+        for (var i = 0; i < results.length; i++) {
+        m = results[i].DATE[0]
+        dui[m] += 1
+        }
