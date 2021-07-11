@@ -1,5 +1,4 @@
-Objective:
-To show the team DUI trends in the NFL
+Objective:To show the team DUI trends in the NFL
 
 Background: There is an average of about 900,000 DUI’s per year in the United States with at least 2,000 resulting in fatal injuries. We have seen an increase of DUI cases within our professional sport team players with NFL players being among the top. So my team and I chose to investigate NFL DUI’s a little further. 
 
