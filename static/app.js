@@ -295,3 +295,9 @@ function lineGraph(yrid){
                 x_value.push(team[teamName])
             }
         }
+        // Line chart months
+        var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var dui = [];
+        for (var i = 0; i <= 12; i++) {
+        dui[i.toString()] = 0
+        }
