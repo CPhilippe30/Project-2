@@ -1,150 +1,3 @@
-initdropdown(); //calls function to fill dropdown object
-function createChart(sampleid){
-    d3.json("data/nfl-dui2.json").then(function(data){
-/*
-Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs 
-found in that individual.
-*/
-        console.log(data)//displays data
-        var samples = data.samples;
-        var filterdata = samples.filter(row => row.id == sampleid);
-        var result = filterdata[0]
-        var sample_values = result.sample_values
-        var otu_ids = result.otu_ids
-        console.log(otu_ids)
-        var data = [{
-            x:sample_values.slice(0, 10).reverse(), 
-            y:otu_ids.slice(0, 10).reverse(),
-            type:"bar",
-            orientation:"h",
-            ylabels: otu_ids,
-            xlabels: sample_values,
-            transform: "rotate(-90)"
-        }];
-        var layout = {
-            title: "NFL DUI Arrests",
-            xaxis: { title: "" },
-            yaxis: { title: "" }
-          };
-    Plotly.newPlot("bar", data, layout);
-    })
-}
-function initdropdown(){
-    d3.json("/main").then(data => {
-
-        var names = data.map(a => a.Year);
-        var display = d3.select("#selDataset");
-        names.forEach((data) => {
-            display.append("option").text(data).property("value", data);
-        });
-    })
-}
-
-//end function initdropdown
-function optionChanged(id){
-    metadata(id);
-    createBarChart(id);
-    gauge(id);
-
-}
-
-function metadata(sampleid){
-    console.log(d3.json('/static/data/nfl-dui2.json'))
-    d3.json("/static/data/nfl-dui2.json").then(function(data){
-        console.log(data)
-        var metadata = data.metadata;
-        var filterdata = data.filter(row => row.Year == sampleid);
-        console.log(sampleid)
-        var result = filterdata[0];
-        var display = d3.select("#sample-metadata");
-        display.html("");
-        Object.entries(result).forEach(([key, value]) => {
-            display.append("h5").text(`${key}: ${value}`);
-        })
-    })
-}
-
-function createBarChart(yrid){
-    // Use d3.json() to fetch data from JSON file
-      d3.json("../static/data/nfl-dui2.json").then((duiData) => {
-          function filterDuiData(dui) {
-          return dui.Year == yrid;
-          }
-          // Use filter() to pass the function as its argument
-          var filteredDui = duiData.filter(filterDuiData);
-          // Filtering Dui.
-          console.log(filteredDui);
-          var teams = filteredDui.map(category =>  category.TEAM);
-          var category = filteredDui.map(category => category.Severity);
-          // Filtered metascores.
-          console.log(category);
-          // Create your trace.
-          var trace = {
-          x: teams,
-          y: category,
-          type: "bar"
-          };
-          // Create the data array for our plot
-          var data = [trace];
-          // Define the plot layout
-          var layout = {
-          title: "Teams with highest DUI Arrested.",
-          xaxis: { teams: "Team" },
-          yaxis: { category: "NFL Team (Dui) Arrests"}
-          };
-          // Plot the chart to a div tag with id "bar-plot"
-          Plotly.newPlot("bar", data, layout);
-      });
-  }
- 
-  function metadata(yrid){
-      d3.json("../static/data/nfl-dui2.json").then(function(data){
-          console.log("in metadata")
-          //filter the year
-          function filterDuiData(d) {
-              return d.Year == yrid;
-          }  
-          var yr = data.filter(filterDuiData)
-          var metadata = yr;
-         // console.log(metadata)
-          var result = metadata;
-          var display = d3.select("#sample-metadata");
-          display.html("");
-          for (i=0; i<result.length; i++){
-              Object.entries(result[i]).forEach(([key, value]) => {
-                  display.append('div');
-                  display.append("h5").html(`<b>${key}</b>: ${value}`);
-              })//end forEach
-              display.append('hr');
-          }
-      })//end d3
-  }//end function
-
-  function metadata(yrid){
-    d3.json("../static/data/nfl-dui2.json").then(function(data){
-        console.log("in metadata")
-        //filter the year
-        function filterDuiData(d) {
-            return d.Year == yrid;
-        }  
-        var yr = data.filter(filterDuiData)
-        var metadata = yr;
-       // console.log(metadata)
-        var result = metadata;
-        var display = d3.select("#sample-metadata");
-        display.html("");
-        for (i=0; i<result.length; i++){
-            Object.entries(result[i]).forEach(([key, value]) => {
-                display.append('div');
-                display.append("h5").html(`<b>${key}</b>: ${value}`);
-            })//end forEach
-            display.append('hr');
-        }
-    })//end d3
-}//end function
-
-
-
 function initdropdown(){
     d3.json("../static/data/nfl-dui2.json").then(function(data){
         //load display values
@@ -163,13 +16,129 @@ function initdropdown(){
         var year = yr[0].Year;
         metadata(year);
         createBarChart(year);
-      //  createBubbles(id);
         gauge(year);
         lineGraph(year)
     })//end d3.json 
 }//end function initdropdown
-
-
+//Creates a bar chart
+function createBarChart(yrid){
+  // Use d3.json() to fetch data from JSON file
+    d3.json("../static/data/nfl-dui2.json").then((duiData) => {
+        function filterDuiData(dui) {
+            return dui.Year == yrid;
+        }
+        // Use filter() to pass the function as its argument
+        var filteredDui = duiData.filter(filterDuiData);
+        // Filtering Dui.
+        console.log(filteredDui);
+        var teams = filteredDui.map(category =>  category.TEAM);
+        var category = filteredDui.map(category => category.Severity);
+        // Filtered metascores.
+        console.log(category);
+        // Create your trace.
+        var trace = {
+        x: teams,
+        y: category,
+        type: "bar"
+        };
+        // Create the data array for our plot
+        var data = [trace];
+        // Define the plot layout
+        var layout = {
+        title: "Teams with highest DUI Arrested.",
+        xaxis: { teams: "Team" },
+        yaxis: { category: "NFL Team (Dui) Arrests"}
+        };
+        // Plot the chart to a div tag with id "bar-plot"
+        Plotly.newPlot("bar", data, layout);
+    });
+}
+function optionChanged(id){
+    metadata(id);
+    createBarChart(id);
+    lineGraph(id);
+   gauge(id);
+}
+var svgWidth = 500;
+var svgHeight = 1500;
+var margin = {
+    top: 20,
+    right: 40,
+    bottom: 60,
+    left: 100
+    };//end margin
+//Loads the detail data into sample metadata area
+function metadata(yrid){
+    d3.json("../static/data/nfl-dui2.json").then(function(data){
+        console.log("in metadata")
+        //filter the year details
+        function filterDuiData(d) {
+            return d.Year == yrid;
+        }  
+        var yr = data.filter(filterDuiData)
+        var metadata = yr;
+       // console.log(metadata)
+        var result = metadata;
+        //var display = d3.select("#sample-metadata");
+    //     display.html("");
+    //    // display.html("<table>");
+    //     // for (i=0; i<result.length; i++){
+    //     //    // display.html('<tr>');
+    //     //     Object.entries(result[i]).forEach(([key, value]) => {
+    //     //         //display.append('div class=row');
+    //     //         display.append("h5").html(`<b>${key}</b>: ${value}`);
+    //     //      //   display.html('</tr>');    
+    //     //     })//end forEach
+    //     //     display.append('hr');
+    //     // }
+    //    // display.html("</table>");
+       createTable(result);
+    })//end d3
+}//end function
+function createTable(data){
+   // d3.json('data.json', function (error, data) {
+        columns = data.keys;
+        console.log(columns);
+        function tabulate(data, columns) {
+              var table = d3.select('#sample-metadata')
+              table.html("")
+              table.append('table')
+              var thead = table.append('thead')
+              var   tbody = table.append('tbody');
+            //   th,
+            //   td {
+            //     width: 150px;
+            //     text-align: center;
+            //     border: 1px solid black;
+            //     padding: 5px;
+            //   }
+              // append the header row
+              thead.append('tr')
+                .selectAll('th')
+                .data(columns).enter()
+                .append('th')
+                  .text(function (column) { return column; });
+              // create a row for each object in the data
+              var rows = tbody.selectAll('tr').html("")
+                .data(data)
+                .enter()
+                .append('tr');
+              // create a cell in each row for each column
+              var cells = rows.selectAll('td')
+                  .data(function (row) {
+                  return columns.map(function (column) {
+                    return {column: column, value: row[column]};
+                  });
+                })
+                .enter()
+                .append('td')
+                  .text(function (d) { return d.value; });
+            return table;
+          }
+          // render the table(s)
+          tabulate(data, ['Year','DATE','TEAM','NAME','POSITION','CASE','CATEGORY','Severity','DESCRIPTION','OUTCOME']); // column in table
+     // });
+}
 function gauge(yrid){
     d3.json("../static/data/nfl-dui2.json").then(function(data){
        // console.log("in metadata")
@@ -236,52 +205,34 @@ function gauge(yrid){
       };//end layout
       Plotly.newPlot('gauge', data, layout);
     })//end d3
-}//end function
-
-
-
-
-
-
+}//end function gauge
+//create a line graph of teams
 function lineGraph(yrid){
     console.log("in line gragh function")
     d3.json("../static/data/nfl-dui2.json").then(function(data){
         // console.log("in metadata")
         // console.log(data)
-        function filterDuiData(d) {
-            return d.Year == yrid;
-        }  
+         function filterDuiData(d) {
+             return d.Year == yrid;
+         }  
         var yrdetails = data.filter(filterDuiData) 
        // var yearTag = d3.select('#selDataset');
-       year_array = [];
-       team_array = [];
-       team = {};
-       data.map((row_data) => {
-           if (year_array.indexOf(row_data.Year) === -1) {
-               year_array.push(row_data.Year)
-               // console.log("row_data")
-               // console.log(row_data.Year)
-           }
-           if (team_array.indexOf(row_data.TEAM) === -1) {
-           team_array.push(row_data.TEAM)
-           }//end if
+        year_array = [];
+        team_array = [];
+        team = {};
+        data.map((row_data) => {
+            if (year_array.indexOf(row_data.Year) === -1) {
+                year_array.push(row_data.Year)
+            }
+            if (team_array.indexOf(row_data.TEAM) === -1) {
+            team_array.push(row_data.TEAM)
+            }//end if
         });//end data.map
         console.log(year_array);
-        // yearTag.append("option")
-        //         .property("value", "")
-        //         .text("Select Year");
-        // year_array.map((year) => {
-        //     yearTag.append("option")
-        //             .property("value", year)
-        //             .text(year);
-        // });
-        // console.log("yearTag")
-        // console.log(yearTag)
         team_array.map((element) => {
             team[element] = 0
-            // console.log(element, "= ", team[element])
         });
-        results = yrdetails; //data.filter(row => row.Year == selected_yr);
+        results = yrdetails; 
         for (var i = 0; i < results.length; i++) {
             teamName = results[i].TEAM
             team[teamName] += 1
@@ -321,5 +272,5 @@ function lineGraph(yrid){
         Plotly.newPlot('line', data, line_layout);
   });
 }// line chart
-
+initdropdown(); //calls function to fill dropdown object
 
