@@ -1,21 +1,62 @@
-Objective:To show the team DUI trends in the NFL
+Objective:
+To show the team DUI trends in the NFL
+ 
+Summary
+ This data visualization focuses on yearly trend data for DUI arrests in the NFL. 
 
-Background: There is an average of about 900,000 DUI’s per year in the United States with at least 2,000 resulting in fatal injuries. We have seen an increase of DUI cases within our professional sport team players with NFL players being among the top. So my team and I chose to investigate NFL DUI’s a little further. 
-
-Dataset: We found a dataset that compiles all of the DUI charges that NFL players have received from the years 2000-2017. The dataset includes the players name, their team, their position, the case and its description, and the outcome of the case (i.e. time served, fine, etc). With the dataset being more qualitative, we did more research and composed a “severity” column that describes the severity of the case ranging from 1-5, 1 being accused of drunk driving to 5 resulting in a fatal crash or involving violent/drug related crimes.
-
-Analysis: We created three graphs to represent our 3 questions:
-Which team had the most/least DUI’s in the given year? (bar chart)
-Which months within a year do we see more DUI cases? (line graph)
-What was the average severity of charges in the given year? (gauge chart)
-
-Results:
-
-Bar Chart:  As you can see, there are some discrepancies between the years but there are a few teams that show up multiple times during the years provided with MIA, MIN, and DEN being some of the few. We also realized that 2006-2017 seemed to have more teams involved in DUI cases than the years prior which averaged about 5 or 6 teams being involved in DUI arrests per year.
-
-Line Graph:  The line graph allowed us to see which months or parts of the year we see more DUI cases among NFL players. Starting in about 2007, we see a decline in arrests typically around August each year. Though, there is not a major difference among the months, one could conclude that it may be associated with the start of the NFL season which typically begins in September. With the slight decline in 2007, we could also conclude that it may be linked to the start of rideshare with Uber launching in 2009 and Lyft launching in 2012.
-
-Gauge Chart:  The gauge chart displays the average severity from all of the teams involved in a DUI charge that year. Most years seem to read an average of or about 2 which we composed to mean that the charge suspect was either driving recklessly or their blood alcohol level was at least a 0.1.
+ The Data
+We retrieved data from Kaggle. The data file was cleaned and converted into a json file. The data specifically looked at the DUI cases of NFL Players The data spans from 2000 to the end of 2017. 
+ 
+Observation
+While reviewing the NFL DUI csv file, there was truly little numerical data showing so we created a new column to point out the severity level for each case.  After creating the severity column, we decide to create specific charts that show the following:
+ 
+Teams with the most cases (Bar Chart)
+Team Severity Average (Gauge)
+ Sum of cases by month for each selected year (Line Chart)
 
 
-Conclusion:  NFL DUI cases seem to be consistent with the nation’s cases however, their charges (severity based on arrest) may be more lenient. 
+
+Outcome
+
+We noticed at least 1-2 teams having the most cases each year.  
+Between 2000-2017, we found a lot of discrepancies between teams charged for DUI and the months within the year with the most DUIs.
+ 
+Conclusion
+ 
+ Team DUI Summary (Highest to Lowest)
+ 
+·   	Minnesota (18)  
+·   	Denver (13)
+·   	Indianapolis (12)
+·   	Cincinnati, Tampa Bay, Seattle, Kansas City (11)
+·   	Miami and Chicago (10)
+·   	Cleveland, Washington, San Diego, New Orleans (9)
+·   	Oakland and Arizona (8)
+·   	Carolina, Houston, Baltimore (7)
+·   	Buffalo (5)
+·   	Pittsburgh, NY Giants, Atlanta, Dallas, Detroit (4)
+·   	NY Jets (3)
+·   	L.A. Rams (2)
+·   	Philadelphia (1)
+ 
+ We saw more teams per year being involved in DUI.  (2000 8 teams vs 2006 13 different teams)
+There wasn't much data to conclude if UBER rides have decreased DUI incidents within the NFL. According to the latest sources, UBER is too new to really show how it is making a difference. 
+ 
+ 
+ 
+Sources:
+Kaggle
+NFL Arrests 2000-2017 | Kaggle
+
+https://www.cnet.com/tech/mobile/uber-scores-deal-with-nfl-so-players-dont-drink-and-drive/https://www.wired.com/2013/09/uber-nfl/
+ 
+CNET
+Uber scores deal with NFL so players don't drink and drive
+The NFL Players Association gives its players credit for Uber services so they can party responsibly. (702 kB)
+https://www.cnet.com/tech/mobile/uber-scores-deal-with-nfl-so-players-dont-drink-and-drive/
+Wired
+Uber Bets Its App Can Curb Drunk Driving in the NFL
+Uber partners with the NFL players' union to address the problem of DUIs among its athletes. But can an app alone really change behavior? (42 kB)
+ 
+Saving Lives: The Lyft & Uber Effect on Drunk Driving
+Saving Lives: The Lyft & Uber Effect on Drunk Driving (ridesharecentral.com)
