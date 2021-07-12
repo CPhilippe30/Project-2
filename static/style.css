@@ -6,43 +6,65 @@
 .bubbles:hover {
   stroke: black;
 }
+​
 .panel-body{
   /* width:100%; */
   height:300px;
   overflow:scroll;
+  
 }
+​
 #my_dataviz {
   /* border-right: 2px solid red; */
   width: 100%;
 }
+​
 #my_dataviz table {
   max-width: 400px;
   width: 100% !important;
   table-layout:fixed;
   width:100%;
 }
+​
 .panel-title{
   text-align: center;
+  
 }
 .bar{
   background-color: blue;
   height: 200px;
+  
 }
 .gauge{
   background-color: blue;
   height: 200px;
+  
 }
 #page-heading{ 
   /* background-image: url("../images/adrian-curiel-_GPDUfIlooM-unsplash.jpg"); */
   background-color: white; 
   background: rgba(252, 250, 249, 0.5);
 }
+​
 .jumbotron{ 
-  background-image: url("../images/adrian-curiel-_GPDUfIlooM-unsplash.jpg");
+  background-image: url("../images/adrian-curiel-_GPDUfIlooM-unsplash.jpg");      
   width: 100%;
 }
+​
 td, th {
   padding: 1px 4px;
+}
+table{
+  border-bottom: blueviolet;
+}
+.footer{
+  text-align: center; 
+  /* font-family: Courier; */
+  color: blue;
+  font-size: 10px;
+  font-style: blue;
+  font-family: verdana;
+  /* font-size: 300%; */
 }
 /* 
 .panel-primary{
