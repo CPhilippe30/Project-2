@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-​
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +12,16 @@
    <!-- Bootstrap <link href="css/bootstrap.min.css" rel="stylesheet">-->
    
 </head>
-​
+
 <body>
-​
+
   <div class="container">
     <div class="row">
       <div class="col-md-12 jumbotron text-center" >
+        <img src= "pic1.jpg">
         <div id="page-heading">
           <h1> NFL DUI Dashboard</h1>
-          <p>Use the dropdown menu below to explore the dataset</p>
+          <p>Use the interactive charts below to explore the dataset</p>
         </div>
       </div>
     </div>
@@ -40,12 +41,6 @@
             <div id="sample-metadata" class="panel-body"></div>
           </div>
      </div>
-      <!-- <div class="col-md-5">
-        <div id="bar"></div>
-      </div>
-      <div class="col-md-5">
-        <div id="gauge"></div>
-      </div> -->
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -58,30 +53,24 @@
     <div class="row">
       <div class="col-md-12">
         <div id="line"></div>
-        <!-- Create a div where the graph will take place -->
-        <div id="my_dataviz2"></div>
       </div>
+    </div>
+    <div class="row" id ="sourcesarea">
+      <div class="col-md-12">
+        <h5> Sources used to compile our data visualization:</h5>
+        <div id="sources"></div>
+     </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <div class="footer">&copy;2021 Team Members: Burnetta Wood, Carline Philippe, Keishauna Turner and Manar Soluiman </div>
-        <!--div id="bubble"></div -->
-        <!-- Create a div where the graph will take place -->
-        <div id="my_dataviz"> 
-          <!-- <svg width="100" height="200">
-            <circle cx="50" cy="50" r="40"
-            stroke="green" stroke-width="4" fill="yellow" />
-          Sorry, your browser does not support inline SVG.
-          </svg> -->
-        </div>
+        <div id="my_dataviz"> </div>
       </div>
     </div>
   </div>
-​
+
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="../static/app.js"></script>
-  <!--script src="../static/linegraph.js"></script -->
-​
-</body>
+ </body>
 </html>
